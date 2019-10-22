@@ -53,10 +53,11 @@ Each Snippet object has 4 fields describing the original search result document:
 The __rank is a unique id of a document under it's query. corresponds to the "r" in each rerank list result file. 
 
 
-4. snippet.py file contains the QuerySnippet and Snippet class. 
+## 4. snippet.py 
+* snippet.py file contains the QuerySnippet and Snippet class. 
 * You can use this file to understand the structure of the object in snippet.pickle 
 
-5. Use tips
+## 5. Use tips
 -- To find a document (snippet) from the rerank list file,
 & extract the DOCUMENT#  and RANK columns.
 * extract qid and r from DOCUMENT#, they are separated by 00
