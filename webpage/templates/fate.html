@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-
+{% load static %}
 <html lang="en">
-  <head>
+  <head
     <meta charset="UTF-8" />
     <title>Project</title>
-    <link href="fate.css" rel="stylesheet"/>
-    <script src="GoogleSearch.js"></script>
+    <link href="{% static 'fate.css' %}" rel="stylesheet"/>
+    <script src="{% static 'googleSearch.js' %}"></script>
   </head>
 
   <body>
     <div class="search">
-      <img class="uw_logo" src="Image/UWLogo.png" alt="University of Washington">
+      <img class="uw_logo" src="{% static 'Image/UWLogo.png' %}" alt="University of Washington">
       <div class="searchBar">
-        <img src="Image/search.png" alt="">
+        <img src="{% static 'Image/search.png' %}" alt="">
         <input id="search-word" type="text" name="search" placeholder="University of Washington">
       </div>
       <div class="searchResult">
