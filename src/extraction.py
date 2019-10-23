@@ -48,8 +48,8 @@ def extractFromFile(file_name, num_snippets):
     lines = file.readlines()
     file.close()
 
-
-    with open("snippet.pickle",'rb') as fr:
+    myPickle = os.path.join(dirname, "../src/snippet.pickle")
+    with open(myPickle,'rb') as fr:
         query_snippet_list = pickle.load(fr)
 
     results = {}
