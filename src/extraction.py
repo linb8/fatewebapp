@@ -1,6 +1,6 @@
 # Author: Danny Saelid
-import snippet
 import pickle
+import os
 
 
 # splits the DOCUMENT# by the middle '00' to get qid and r
@@ -40,12 +40,16 @@ returns snippet data in the format:
 for each qid, snippet1 corresponds to the first snippet in the reranked list
 """
 
+
 def extractFromFile(file_name, num_snippets):
-    file = open("./SampleData/" + file_name, "r")
+    dirname = os.path.dirname(__file__)
+    filename = os.path.join(dirname, "../SampleData/", file_name)
+    file = open(filename)
     lines = file.readlines()
     file.close()
 
-    with open("./snippet.pickle", 'rb') as fr:
+
+    with open("snippet.pickle",'rb') as fr:
         query_snippet_list = pickle.load(fr)
 
     results = {}
