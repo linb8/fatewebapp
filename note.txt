@@ -1,0 +1,11 @@
+Author: Yukai Yan
+
+Make sure Django is downloaded onto your computer: https://www.djangoproject.com/
+1. src folder contains the backend for getting the data from the database(?)
+2. Updates should be made to the file in webpage/static folder (NOT webpage/webpage/static folder!)
+3. cd webpage for using the front end
+    a. py manage.py runserver      -- start front end
+    b. py manage.py collectstatic  -- run after step 2
+    c. py manage.py migrate        -- delete/add files mentioned in step 2
+4. Adjusting webpage/webpage/settings.py as necessary (e.x. last line)
+

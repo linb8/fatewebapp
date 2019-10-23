@@ -6,6 +6,7 @@ import os
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
+
 def home(request):
     #return HttpResponse(dir_path)
     return render(request, "fate.html")
