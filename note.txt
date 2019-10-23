@@ -7,5 +7,5 @@ Make sure Django is downloaded onto your computer: https://www.djangoproject.com
     a. py manage.py runserver      -- start front end
     b. py manage.py collectstatic  -- run after step 2
     c. py manage.py migrate        -- delete/add files mentioned in step 2
-4. Adjusting webpage/webpage/settings.py as necessary (e.x. last line)
+4. Adjusting webpage/webpage/settings.py as necessary (e.x. last line), but PLEASE DON'T COMMIT CHANGE
 
