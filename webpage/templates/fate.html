@@ -57,6 +57,10 @@
             var rate = document.getElementsByName('rating');
             for(var i=1; i<rate.length; i++){
                 console.log(rate[i].checked)
+                if(rate[i].checked == true){
+                  console.log("user selects" + i)
+                  return i //number
+                }
             }
           }
         </script>
