@@ -10,18 +10,23 @@
 
   <body>
     <div class="search">
-      <img class="uw_logo" src="{% static 'Image/UWLogo.png' %}" alt="University of Washington">
-      <div class="searchBar">
-        <img src="{% static 'Image/search.png' %}" alt="">
+      <img id="uw_logo" class="uw_logo" src="{% static 'Image/UWLogo.png' %}" alt="University of Washington">
+      <div class="searchBar" id="searchBar">
+        <img src="{% static 'Image/search.png' %}" alt="search_icon">
         <input id="search-word" type="text" name="search" placeholder="University of Washington">
       </div>
       <div class="searchResult">
         <div class="resultInfo">
-          <!--<div class="title">title</div>
-          <div class="description">description</div> -->
+
         </div>
+        <!--
+        <div class="resultInfo">
+          <div class="title">title</div>
+          <div class="description">description</div>
+        </div>
+        -->
       </div>
-        <form class="form" name="rating" method="post">
+        <form id="form" class="form" name="rating" method="post">
           <strong>Select rating: </strong>
           <div class="rating">
             <label class="container">
