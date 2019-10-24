@@ -33,7 +33,7 @@
    function submitResult() {
      let submitButton = document.querySelector(".submit");
      submitButton.disabled = true;
-     after_search(); //chaning css style
+     after_search(); //change css style
      fillColumn();
    }
 
