@@ -33,6 +33,7 @@
    function submitResult() {
      let submitButton = document.querySelector(".submit");
      submitButton.disabled = true;
+     after_search(); //chaning css style
      fillColumn();
    }
 
@@ -40,7 +41,6 @@
      let submitButton = document.querySelector(".submit");
      submitButton.disabled = false;
    }
-
    function populateResults(responseData) {
      for (let i = 0; i < responseData.items.length; i++) {
        let title = document.createElement("div");
@@ -52,6 +52,18 @@
        let resultInfo = document.querySelector(".resultInfo");
        resultInfo.appendChild(title);
        resultInfo.appendChild(description);
+     }
+   }
+
+   function after_search() {
+     //change css style
+     document.getElementById("form").style.visibility = "visible";
+     var className = document.getElementById("searchBar");
+     if (className.className = "searchBar"){
+       console.log(className.className);
+       className.className = "searchBar_after";
+       var uw_logo = document.getElementById("uw_logo");
+       uw_logo.className= "uw_logo_after";
      }
    }
 
