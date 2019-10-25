@@ -25,6 +25,7 @@
      searchEngine.addEventListener("keypress", function(e) {
        let key = e.which || e.keyCode;
        if (key == 13) {
+         after_search(); //change css style
          fillColumn();
        }
      });
@@ -33,7 +34,6 @@
    function submitResult() {
      let submitButton = document.querySelector(".submit");
      submitButton.disabled = true;
-     after_search(); //change css style
      fillColumn();
    }
 
@@ -42,7 +42,7 @@
      submitButton.disabled = false;
    }
    function populateResults(responseData) {
-     for (let i = 0; i < responseData.items.length; i++) {
+     for (let i = 0; i < 5; i++) {
        let title = document.createElement("div");
        let description = document.createElement("div");
        title.className = "title";
@@ -57,10 +57,10 @@
 
    function after_search() {
      //change css style
+     console.log("changing style")
      document.getElementById("form").style.visibility = "visible";
      var className = document.getElementById("searchBar");
      if (className.className = "searchBar"){
-       console.log(className.className);
        className.className = "searchBar_after";
        var uw_logo = document.getElementById("uw_logo");
        uw_logo.className= "uw_logo_after";
