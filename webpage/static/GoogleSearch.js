@@ -41,14 +41,15 @@
      let submitButton = document.querySelector(".submit");
      submitButton.disabled = false;
    }
+
    function populateResults(responseData) {
      for (let i = 0; i < 5; i++) {
        let title = document.createElement("div");
        let description = document.createElement("div");
        title.className = "title";
        description.className = "description";
-       title.innerHTML = responseData.items[i].title;
-       description.innerHTML = responseData.items[i].snippet;
+       title.innerHTML = responseData[1][i][1];
+       description.innerHTML = responseData[1][i][3];
        let resultInfo = document.querySelector(".resultInfo");
        resultInfo.appendChild(title);
        resultInfo.appendChild(description);
@@ -71,7 +72,8 @@
     let column = document.querySelector(".resultInfo");
     column.innerHTML = "";
     let search = document.getElementById("search-word");
-    let url = "https://www.googleapis.com/customsearch/v1?key=AIzaSyADu5e_mxAUXwV55-k_uLdhAOfVaz77w4U&cx=016380682806239544582:uue1xujzz4w&q=" + search.value;
+    //let url = "https://www.googleapis.com/customsearch/v1?key=AIzaSyADu5e_mxAUXwV55-k_uLdhAOfVaz77w4U&cx=016380682806239544582:uue1xujzz4w&q=" + search.value;
+    let url = "http://127.0.0.1:8000/t/results/";
     fetch(url)
       .then(checkStatus)
       .then(JSON.parse)
