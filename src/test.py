@@ -1,7 +1,7 @@
 import extraction as ex
 
 def main():
-    result = ex.extractFromFile("1g.txt", 6)
+    result = ex.extractFromFile("01gfp.txt", 6)
     print(result)
 
 

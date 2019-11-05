@@ -12,9 +12,8 @@ from extraction import *
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
 # List of algorithms
-listOfStrings = ['0g', '0gf', '0gfp', '001g', '001gf', '001gfp', '01g', '01gf',
-                 '01gfp', '1g', '1gf','1gfp','05g', '05gf', '05gfp', 'p', 'pp',
-                 'r','rp','t','tp']
+listOfStrings = ['0g', '0gf', '0gfp', '01g', '01gf', '01gfp','05g', '05gf', '05gfp', '09g', '09gf',
+                 '09gfp','p','pp','r','rp','t','tp']
 
 
 def home(request):
