@@ -1,12 +1,8 @@
-/* Return a json that contains 10 search results
- * This function can be called when user clicks "search" button
- * Note that an error may happen when exceeds 100 queries per day
- *
- * Examples of using json:
- *   var item = json.items[i];
- *   var title = item.title;
- *   var snippet = item.snippet;
- */
+
+// Global Variable
+var index = 0;
+var responseData;
+var userResponse = "";
 
  (function() {
    "use strict";
@@ -16,41 +12,68 @@
    function init() {
      let submitButton = document.querySelector(".submit");
      submitButton.disabled = true;
-     submitButton.addEventListener("click", submitResult);
+     submitButton.addEventListener("click", submit_form);
      let ratingButton = document.getElementsByName("rating");
      for (let i = 0; i < ratingButton.length; i++) {
        ratingButton[i].addEventListener("click", chooseRating);
      }
+     after_search(); //change css style
+     fillColumn();
+
+     /*
      let searchEngine = document.getElementById("search-word");
      searchEngine.addEventListener("keypress", function(e) {
        let key = e.which || e.keyCode;
        if (key == 13) {
-         after_search(); //change css style
-         fillColumn();
+
        }
      });
+     */
    }
 
+   /*
    function submitResult() {
      let submitButton = document.querySelector(".submit");
      submitButton.disabled = true;
      fillColumn();
    }
+   */
 
    function chooseRating() {
      let submitButton = document.querySelector(".submit");
      submitButton.disabled = false;
    }
 
-   function populateResults(responseData) {
+   function handleRequest(data) {
+     responseData = data;
+     updateResults();
+   }
+
+   function updateResults() {
+     console.log(userResponse);
+     index = index + 1;
+     if (index <= 20) {                 //only 20 queries
+        populateResults();
+     } else {
+        window.location = window.location + "end/" + userResponse;    // redirect
+     }
+   }
+
+   function populateResults() {
+     // update search box placeholder
+     let searchEngine = document.getElementById("search-word");
+     searchEngine.placeholder = responseData[index][1][0];
+
+     // display results, but clear all previous results first
+     let resultInfo = document.querySelector(".resultInfo");
+     resultInfo.innerHTML = "";
      for (let i = 0; i < 5; i++) {
        let title = document.createElement("div");
        let description = document.createElement("div");
        title.className = "title";
        description.className = "description";
-       title.innerHTML = responseData[1][i][1];
-       description.innerHTML = responseData[1][i][3];
-       let resultInfo = document.querySelector(".resultInfo");
+       title.innerHTML = responseData[index][i][1];
+       description.innerHTML = responseData[index][i][3];
        resultInfo.appendChild(title);
        resultInfo.appendChild(description);
      }
@@ -58,7 +81,7 @@
 
    function after_search() {
      //change css style
-     console.log("changing style")
+     // console.log("changing style")
      document.getElementById("form").style.visibility = "visible";
      var className = document.getElementById("searchBar");
      if (className.className = "searchBar"){
@@ -73,11 +96,11 @@
     column.innerHTML = "";
     let search = document.getElementById("search-word");
     //let url = "https://www.googleapis.com/customsearch/v1?key=AIzaSyADu5e_mxAUXwV55-k_uLdhAOfVaz77w4U&cx=016380682806239544582:uue1xujzz4w&q=" + search.value;
-    let url = "http://127.0.0.1:8000/t/results/";
+    let url = "http://127.0.0.1:8000/01gfp/results/";
     fetch(url)
       .then(checkStatus)
       .then(JSON.parse)
-      .then(populateResults)
+      .then(handleRequest)
       .catch(console.error);
   }
 
@@ -95,4 +118,17 @@
     }
   }
 
+  function submit_form(){
+    //console.log("form submitted")
+    //return selected rating value
+    var rate = document.getElementsByName('rating');
+    for(var i=1; i<rate.length; i++){
+        if(rate[i].checked == true){
+            //console.log("user selects" + " " +i)
+            userResponse += i.toString() //number
+        }
+
+    }
+    updateResults();
+  }
 })();

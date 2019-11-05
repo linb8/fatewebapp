@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
-  <head
+  <head>
     <meta charset="UTF-8" />
     <title>Project</title>
     <link href="{% static 'fate.css' %}" rel="stylesheet"/>
@@ -13,7 +13,7 @@
       <img id="uw_logo" class="uw_logo" src="{% static 'Image/UWLogo.png' %}" alt="University of Washington">
       <div class="searchBar" id="searchBar">
         <img class="search_icon" src="{% static 'Image/search.png' %}" alt="search_icon">
-        <input id="search-word" type="text" name="search" placeholder="University of Washington">
+        <input id="search-word" type="text" name="search" disabled>
       </div>
       <div class="searchResult">
         <div class="resultInfo">
@@ -49,24 +49,9 @@
               <span class="mark"><strong class="number">5</strong></span>
             </label>
           </div>
-        <button onClick="submit_form()" class="submit" type="button">Submit</button>
-        <script type="text/javascript">
-          function submit_form(){
-            console.log("form submitted")
-            //return selected rating value
-            var rate = document.getElementsByName('rating');
-            for(var i=1; i<rate.length; i++){
-                console.log(rate[i].checked)
-                if(rate[i].checked == true){
-                  console.log("user selects" + " " +i)
-                  //refresh page
-                  //location.reload();
-                  return i //number
-                }
-            }
-          }
-        </script>
+        <button class="submit" type="button">Submit</button>
         </form>
+      </div>
     </search>
   </body>
 </html>
