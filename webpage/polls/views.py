@@ -19,8 +19,13 @@ listOfStrings = ['0g', '0gf', '0gfp', '001g', '001gf', '001gfp', '01g', '01gf',
 
 def home(request):
     #return HttpResponse(dir_path)
+    return render(request, "home.html")
+
+def main(request):
     return render(request, "fate.html")
 
+def end(request):
+    return render(request,"end.html")
 
 def handle(request, query):
     if query in listOfStrings:
