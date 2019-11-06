@@ -174,15 +174,16 @@
   margin-top: 0.5em;
   font-size: 1.8em;
   font-weight: bold;
-  color: rgb(56, 48, 110);
+  color: blue;
+  text-decoration: underline;
 }
 .url{
   font-size: 1em;
-  color: blue;
+  color: #008000;
 }
 .description{
   font-size: 1em;
-  color: #888888;
+  color: #565656;
 }
 .info{
   margin-bottom: 2em;

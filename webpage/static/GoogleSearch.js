@@ -19,16 +19,6 @@ var userResponse = "";
      }
      after_search(); //change css style
      fillColumn();
-
-     /*
-     let searchEngine = document.getElementById("search-word");
-     searchEngine.addEventListener("keypress", function(e) {
-       let key = e.which || e.keyCode;
-       if (key == 13) {
-
-       }
-     });
-     */
    }
 
    /*
@@ -70,11 +60,15 @@ var userResponse = "";
      for (let i = 0; i < 5; i++) {
        let title = document.createElement("div");
        let description = document.createElement("div");
+       let link = document.createElement("div");
        title.className = "title";
+       link.className = "url";
        description.className = "description";
        title.innerHTML = responseData[index][i][1];
+       link.innerHTML = responseData[index][i][2];
        description.innerHTML = responseData[index][i][3];
        resultInfo.appendChild(title);
+       resultInfo.appendChild(link);
        resultInfo.appendChild(description);
      }
    }
@@ -94,8 +88,6 @@ var userResponse = "";
   function fillColumn() {
     let column = document.querySelector(".resultInfo");
     column.innerHTML = "";
-    let search = document.getElementById("search-word");
-    //let url = "https://www.googleapis.com/customsearch/v1?key=AIzaSyADu5e_mxAUXwV55-k_uLdhAOfVaz77w4U&cx=016380682806239544582:uue1xujzz4w&q=" + search.value;
     let url = "http://127.0.0.1:8000/01gfp/results/";
     fetch(url)
       .then(checkStatus)
