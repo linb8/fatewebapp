@@ -44,7 +44,7 @@ var seconds;
     // get seconds
     seconds = Math.round(timeDiff);
     console.log(seconds + " seconds");
-    timeRemaining = 60 - seconds;
+    timeRemaining = 15 - seconds;
     document.getElementById("clock").innerHTML = timeRemaining;
     if(timeRemaining == 0){
       updateResults();
@@ -100,7 +100,7 @@ var seconds;
        resultInfo.appendChild(title);
        resultInfo.appendChild(link);
        resultInfo.appendChild(description);
-       //start couting
+       //start counting
        start();
      }
    }
