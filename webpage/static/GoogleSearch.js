@@ -143,6 +143,8 @@ var seconds;
   }
 
   function submit_form(){
+    //disable button
+    document.querySelector(".submit").disabled = true;
     console.log("time took:" + seconds)
     //console.log("form submitted")
     //return selected rating value
@@ -155,7 +157,6 @@ var seconds;
             rate[i].checked = false;
         }
     }
-    submitButton.disabled = true;
     updateResults();
   }
 })();
