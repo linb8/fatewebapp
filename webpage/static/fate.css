@@ -22,7 +22,7 @@
   background-color: #ECECEC;
   border-radius: 1.7em;
   border: 0.1em solid #ECECEC;
-  width: 30%;
+  width: 50%;
   height: 3em;
   justify-content: space-around;
   align-items:  center;
@@ -198,6 +198,6 @@
   justify-content: space-around;
   align-items: flex-start;
 }
-body{
-  overflow-x: hidden;
+strong{
+  font-size: 1em;
 }
