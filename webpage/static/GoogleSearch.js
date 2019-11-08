@@ -2,7 +2,7 @@
 // Global Variable
 var index = 0;
 var responseData;
-var userResponse = [];
+var userResponse = "";
 var startTime;
 var endTime;
 var timeRemaining;
@@ -21,7 +21,6 @@ var seconds;
      for (let i = 0; i < ratingButton.length; i++) {
        ratingButton[i].addEventListener("click", chooseRating);
      }
-     after_search(); //change css style
      fillColumn();
    }
 
@@ -43,7 +42,7 @@ var seconds;
     timeDiff /= 1000;
     // get seconds
     seconds = Math.round(timeDiff);
-    console.log(seconds + " seconds");
+    //console.log(seconds + " seconds");
     timeRemaining = 15 - seconds;
     document.getElementById("clock").innerHTML = timeRemaining;
     if(timeRemaining == 0){
@@ -67,7 +66,7 @@ var seconds;
    }
 
    function updateResults() {
-     console.log(userResponse);
+     //console.log(userResponse);
      index = index + 1;
      if (index <= 20) {
        //only 20 queries
@@ -78,6 +77,8 @@ var seconds;
    }
 
    function populateResults() {
+      //disable the button
+     document.querySelector(".submit").disabled = true;
      // update search box placeholder
      let searchEngine = document.getElementById("search-word");
      searchEngine.placeholder = responseData[index][1][0];
@@ -100,27 +101,16 @@ var seconds;
        resultInfo.appendChild(title);
        resultInfo.appendChild(link);
        resultInfo.appendChild(description);
-       //start counting
-       start();
+       //start couting
      }
-   }
-
-   function after_search() {
-     //change css style
-     // console.log("changing style")
-     document.getElementById("form").style.visibility = "visible";
-     var className = document.getElementById("searchBar");
-     if (className.className = "searchBar"){
-       className.className = "searchBar_after";
-       var uw_logo = document.getElementById("uw_logo");
-       uw_logo.className= "uw_logo_after";
-     }
+     start();
    }
 
   function fillColumn() {
     let column = document.querySelector(".resultInfo");
     column.innerHTML = "";
-    let url = "http://127.0.0.1:8000/01gfp/results/";
+    let currentUrl = window.location.href;
+    let url = currentUrl.substring(0, currentUrl.length - 5) + "01gfp/results/";
     fetch(url)
       .then(checkStatus)
       .then(JSON.parse)
@@ -143,16 +133,14 @@ var seconds;
   }
 
   function submit_form(){
-    //disable button
-    document.querySelector(".submit").disabled = true;
     console.log("time took:" + seconds)
     //console.log("form submitted")
     //return selected rating value
     var rate = document.getElementsByName('rating');
     for(var i=1; i<rate.length; i++){
-        if(rate[i].checked == true){
-            //console.log("user selects" + " " +i)
-            userResponse.push(i.toString()) //number
+        if(rate[i].checked){
+            console.log("user selects" + " " +i)
+            userResponse += i.toString() //number
             //clear cache
             rate[i].checked = false;
         }

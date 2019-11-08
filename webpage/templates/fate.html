@@ -5,14 +5,13 @@
     <meta charset="UTF-8" />
     <title>Project</title>
     <link href="{% static 'fate.css' %}" rel="stylesheet"/>
-    <script src="{% static 'googleSearch.js' %}"></script>
+    <script src="{% static 'GoogleSearch.js' %}"></script>
   </head>
 
   <body>
     <div class="search">
-      <strong id="clock"></strong>
-      <img id="uw_logo" class="uw_logo" src="{% static 'Image/UWLogo.png' %}" alt="University of Washington">
-      <div class="searchBar" id="searchBar">
+      <img id="uw_logo" class="uw_logo_after" src="{% static 'Image/UWLogo.png' %}" alt="University of Washington">
+      <div class="searchBar_after" id="searchBar">
         <img class="search_icon" src="{% static 'Image/search.png' %}" alt="search_icon">
         <input id="search-word" type="text" name="search" disabled>
       </div>
@@ -50,6 +49,7 @@
               <span class="mark"><strong class="number">5</strong></span>
             </label>
           </div>
+        <strong id="clock" style="color: 000000;"></strong>
         <button class="submit" type="button">Submit</button>
         </form>
       </div>
