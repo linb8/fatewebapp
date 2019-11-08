@@ -23,18 +23,16 @@ var seconds;
      }
      fillColumn();
    }
-
    /*
    function submitResult() {
-     let submitButton = document.querySelector(".submit");
-     submitButton.disabled = true;
-     fillColumn();
+     updateResults();
    }
    */
+
    function start() {
     startTime = new Date();
     couting();
-  };
+  }
 
   function couting() {
     endTime = new Date();
@@ -46,6 +44,7 @@ var seconds;
     timeRemaining = 15 - seconds;
     document.getElementById("clock").innerHTML = timeRemaining;
     if(timeRemaining == 0){
+      document.querySelector(".submit").disabled = true;
       updateResults();
       console.error("time out");;
     }
@@ -78,7 +77,7 @@ var seconds;
 
    function populateResults() {
       //disable the button
-     document.querySelector(".submit").disabled = true;
+
      // update search box placeholder
      let searchEngine = document.getElementById("search-word");
      searchEngine.placeholder = responseData[index][1][0];
@@ -94,8 +93,6 @@ var seconds;
        link.className = "url";
        description.className = "description";
        title.innerHTML = responseData[index][i][1];
-       title.href = responseData[index][i][2];
-       title.target = "_blank";
        link.innerHTML = responseData[index][i][2];
        description.innerHTML = responseData[index][i][3];
        resultInfo.appendChild(title);
@@ -132,7 +129,8 @@ var seconds;
     }
   }
 
-  function submit_form(){
+  function submit_form() {
+    document.querySelector(".submit").disabled = true;
     console.log("time took:" + seconds)
     //console.log("form submitted")
     //return selected rating value
