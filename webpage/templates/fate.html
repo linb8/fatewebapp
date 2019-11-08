@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Project</title>
+    <link href="{% static 'fate.css' %}" rel="stylesheet"/>
+    <script src="{% static 'GoogleSearch.js' %}"></script>
+  </head>
+
+  <body>
+    <div class="search">
+      <img id="uw_logo" class="uw_logo_after" src="{% static 'Image/UWLogo.png' %}" alt="University of Washington">
+      <div class="searchBar_after" id="searchBar">
+        <img class="search_icon" src="{% static 'Image/search.png' %}" alt="search_icon">
+        <input id="search-word" type="text" name="search" disabled>
+      </div>
+      <div class="searchResult">
+        <div class="resultInfo">
+        </div>
+        <!--
+        <div class="resultInfo">
+          <div class="title">title</div>
+          <div class="description">description</div>
+        </div>
+        -->
+      </div>
+        <form id="form" class="form" name="rating" method="post">
+          <strong>Select rating: </strong>
+          <div class="rating">
+            <label class="container">
+              <input type="radio" name="rating" value=1>
+              <span class="mark"><strong class="number">1</strong></span>
+            </label>
+            <label class="container">
+              <input type="radio" name="rating" value=2>
+              <span class="mark"><strong class="number">2</strong></span>
+            </label>
+            <label class="container">
+              <input type="radio" name="rating" value=3>
+              <span class="mark"><strong class="number">3</strong></span>
+            </label>
+            <label class="container">
+              <input type="radio" name="rating" value=4>
+              <span class="mark"><strong class="number">4</strong></span>
+            </label>
+            <label class="container">
+              <input type="radio" name="rating" value=5>
+              <span class="mark"><strong class="number">5</strong></span>
+            </label>
+          </div>
+        <strong id="clock" style="color: 000000;"></strong>
+        <button class="submit" type="button">Submit</button>
+        </form>
+      </div>
+    </search>
+  </body>
+</html>
