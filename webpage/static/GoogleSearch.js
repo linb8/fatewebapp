@@ -76,8 +76,6 @@ var seconds;
    }
 
    function populateResults() {
-      //disable the button
-
      // update search box placeholder
      let searchEngine = document.getElementById("search-word");
      searchEngine.placeholder = responseData[index][1][0];
