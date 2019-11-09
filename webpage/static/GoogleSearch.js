@@ -11,6 +11,8 @@ var seconds;
  (function() {
    "use strict";
 
+   let timerId = null;
+
    window.addEventListener("load", init);
 
    function init() {
@@ -43,12 +45,14 @@ var seconds;
     //console.log(seconds + " seconds");
     timeRemaining = 15 - seconds;
     document.getElementById("clock").innerHTML = timeRemaining;
-    if(timeRemaining == 0){
+    if(timeRemaining == 0) {
+      clearInterval(timerId);
+      timerId = null;
       document.querySelector(".submit").disabled = true;
       updateResults();
       console.error("time out");;
     }
-    setTimeout(function(){
+    timerId = setTimeout(function(){
       couting()
     //do what you need here
     }, 1000);
@@ -128,7 +132,8 @@ var seconds;
   }
 
   function submit_form() {
-    document.querySelector(".submit").disabled = true;
+    let submitButton = document.querySelector(".submit");
+    submitButton.disabled = true;
     console.log("time took:" + seconds)
     //console.log("form submitted")
     //return selected rating value
