@@ -6,16 +6,17 @@ var userResponse = "";
 var startTime;
 var endTime;
 var timeRemaining;
-var choice = 0;
+var choice = 4;
 var count = 0;
 
  (function() {
    "use strict";
 
    let timerId = null;
-   let set = "01gfp";
+   let set = "";
    let timerMode = false;
    let seconds = 15;
+   let seen = [];
    const ALGORITHM = new Array("0g", "01gfp", "05gfp", "09gfp");
 
    window.addEventListener("load", init);
@@ -28,41 +29,47 @@ var count = 0;
      for (let i = 0; i < ratingButton.length; i++) {
        ratingButton[i].addEventListener("click", chooseRating);
      }
-     //generateResult();
+     generateRandom();
      fillColumn();
    }
-   /*
-   function generateResult() {
+
+   function generateRandom() {
      let randomCount = Math.floor(Math.random() * ALGORITHM.length);
-     if (randomCount == choice) {
-       generateResult();
+     if (seen.includes(randomCount) && seen.length != 4) {
+       generateRandom();
      } else {
-       choice = randomCount;
-       set = ALGORITHM[0];
-       if (set == "0g" || set == "01gfp") {
-         index = 0;
-       } else {
-         index = 10;
+       if (seen.length != 4) {
+         seen.push(randomCount);
+         set = ALGORITHM[randomCount];
+         if (set == "0g" || set == "01gfp") {
+           index = 0;
+         } else {
+           index = 10;
+         }
        }
-       count++;
      }
    }
-   */
-   /*
+
+
    function updateResults() {
      index++;
+     count++;
      if (index <= 10) {
        populateResults();
-     } else if (index > 10 && index <= 20) {
-       populateResults();
-     } else {
-       generateResult();
+       if (index == 10) {
+          generateRandom();
+       }
      }
-     if (count == 4) {
+     if (index > 10 && index <= 20) {
+       populateResults();
+       if (index == 20) {
+          generateRandom();
+       }
+     }
+     if (count == 41) {
        window.location = window.location + "end/" + userResponse;
      }
    }
-   */
 
    function startTimer() {
      timerId = setInterval(function() {
@@ -118,7 +125,7 @@ var count = 0;
      responseData = data;
      updateResults();
    }
-
+   /*
    function updateResults() {
      //console.log(userResponse);
      index = index + 1;
@@ -130,6 +137,7 @@ var count = 0;
         window.location = window.location + "end/" + userResponse;    // redirect
      }
    }
+   */
 
    function populateResults() {
      // update search box placeholder
@@ -200,7 +208,7 @@ var count = 0;
     }
     clearInterval(timerId)
     timerId = null;
-    seconds = 16;
+    seconds = 15;
     updateResults();
   }
 })();
