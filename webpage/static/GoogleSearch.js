@@ -13,7 +13,7 @@ var count = 0;
    "use strict";
 
    let timerId = null;
-   let set = "";
+   let set = "01gfp";
    let timerMode = false;
    let seconds = 15;
    const ALGORITHM = new Array("0g", "01gfp", "05gfp", "09gfp");
@@ -28,10 +28,10 @@ var count = 0;
      for (let i = 0; i < ratingButton.length; i++) {
        ratingButton[i].addEventListener("click", chooseRating);
      }
-     generateResult();
+     //generateResult();
      fillColumn();
    }
-
+   /*
    function generateResult() {
      let randomCount = Math.floor(Math.random() * ALGORITHM.length);
      if (randomCount == choice) {
@@ -47,6 +47,7 @@ var count = 0;
        count++;
      }
    }
+   */
    /*
    function updateResults() {
      index++;
@@ -68,9 +69,9 @@ var count = 0;
        if (seconds == 0) {
          clearInterval(timerId);
          timerId = null;
+         seconds = 15;
          document.querySelector(".submit").disabled = true;
          updateResults();
-         seconds = 15;
        } else {
          timerMode = true;
          seconds--;
@@ -197,6 +198,9 @@ var count = 0;
             rate[i].checked = false;
         }
     }
+    clearInterval(timerId)
+    timerId = null;
+    seconds = 16;
     updateResults();
   }
 })();
