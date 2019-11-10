@@ -6,12 +6,17 @@ var userResponse = "";
 var startTime;
 var endTime;
 var timeRemaining;
-var seconds;
+var choice = 0;
+var count = 0;
 
  (function() {
    "use strict";
 
    let timerId = null;
+   let set = "";
+   let timerMode = false;
+   let seconds = 15;
+   const ALGORITHM = new Array("0g", "01gfp", "05gfp", "09gfp");
 
    window.addEventListener("load", init);
 
@@ -23,14 +28,59 @@ var seconds;
      for (let i = 0; i < ratingButton.length; i++) {
        ratingButton[i].addEventListener("click", chooseRating);
      }
+     generateResult();
      fillColumn();
    }
+
+   function generateResult() {
+     let randomCount = Math.floor(Math.random() * ALGORITHM.length);
+     if (randomCount == choice) {
+       generateResult();
+     } else {
+       choice = randomCount;
+       set = ALGORITHM[0];
+       if (set == "0g" || set == "01gfp") {
+         index = 0;
+       } else {
+         index = 10;
+       }
+       count++;
+     }
+   }
    /*
-   function submitResult() {
-     updateResults();
+   function updateResults() {
+     index++;
+     if (index <= 10) {
+       populateResults();
+     } else if (index > 10 && index <= 20) {
+       populateResults();
+     } else {
+       generateResult();
+     }
+     if (count == 4) {
+       window.location = window.location + "end/" + userResponse;
+     }
    }
    */
 
+   function startTimer() {
+     timerId = setInterval(function() {
+       if (seconds == 0) {
+         clearInterval(timerId);
+         timerId = null;
+         document.querySelector(".submit").disabled = true;
+         updateResults();
+         seconds = 15;
+       } else {
+         timerMode = true;
+         seconds--;
+       }
+       let time = document.getElementById("clock");
+       time.textContent = seconds;
+     }, 1000)
+   }
+
+   /*
    function start() {
     startTime = new Date();
     couting();
@@ -45,19 +95,19 @@ var seconds;
     //console.log(seconds + " seconds");
     timeRemaining = 15 - seconds;
     document.getElementById("clock").innerHTML = timeRemaining;
-    if(timeRemaining == 0) {
+    if (timeRemaining == 0) {
       clearInterval(timerId);
       timerId = null;
       document.querySelector(".submit").disabled = true;
       updateResults();
       console.error("time out");;
     }
-    timerId = setTimeout(function(){
+    timerId = setInterval(function(){
       couting()
     //do what you need here
     }, 1000);
   }
-
+  */
    function chooseRating() {
      let submitButton = document.querySelector(".submit");
      submitButton.disabled = false;
@@ -73,7 +123,8 @@ var seconds;
      index = index + 1;
      if (index <= 20) {
        //only 20 queries
-        populateResults();
+       //generateResult();
+       populateResults();
      } else {
         window.location = window.location + "end/" + userResponse;    // redirect
      }
@@ -102,14 +153,14 @@ var seconds;
        resultInfo.appendChild(description);
        //start couting
      }
-     start();
+     startTimer();
    }
 
   function fillColumn() {
     let column = document.querySelector(".resultInfo");
     column.innerHTML = "";
     let currentUrl = window.location.href;
-    let url = currentUrl.substring(0, currentUrl.length - 5) + "01gfp/results/";
+    let url = currentUrl.substring(0, currentUrl.length - 5) + set + "/results/";
     fetch(url)
       .then(checkStatus)
       .then(JSON.parse)
