@@ -25,6 +25,9 @@ def home(request):
     #return HttpResponse(dir_path)
     return render(request, "home.html")
 
+def demographics(request):
+    return render(request, "demographics.html")
+
 
 def main(request):
     return render(request, "fate.html")
