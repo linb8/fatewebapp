@@ -50,7 +50,6 @@ var count = 0;
      }
    }
 
-
    function updateResults() {
      index++;
      count++;
