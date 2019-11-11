@@ -11,6 +11,11 @@ h2 {
   margin-left: 100px;
   margin-right: 100px;
 }
+
+.mturk-id {
+  text-align: center;
+  padding-top: 10px;
+}
 </style>
 </head>
 <body>
@@ -24,6 +29,13 @@ h2 {
       your responses and this string, and if it all looks good, your payment
       will be processed within the next three days.
     </p>
+  </div>
+  <div class="mturk-id">
+  <form>
+    <label for="mturk-id">Please enter your <b>MTurk Worker ID</b> to receive credit:</label><br>
+    <input type="text" name="mturk-id" required size="20">
+    <input type="submit" value="Submit">
+  </form>
   </div>
 </main>
 
