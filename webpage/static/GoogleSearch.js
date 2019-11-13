@@ -207,7 +207,7 @@ var count = 0;
     }
     clearInterval(timerId)
     timerId = null;
-    seconds = 15;
+    seconds = 16;
     updateResults();
   }
 })();
