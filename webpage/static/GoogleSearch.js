@@ -159,8 +159,9 @@ var count = 0;
        resultInfo.appendChild(title);
        resultInfo.appendChild(link);
        resultInfo.appendChild(description);
-       //start couting
      }
+
+     //start counting
      startTimer();
    }
 

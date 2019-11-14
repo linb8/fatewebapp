@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.http import JsonResponse
 import os
 import json
@@ -20,13 +20,23 @@ algorithm = ''
 # user responses
 userResponses = []
 
+# user stats
+respondent = []
+
 
 def home(request):
     #return HttpResponse(dir_path)
     return render(request, "home.html")
 
 def demographics(request):
-    return render(request, "demographics.html")
+    if 'age' in request.GET:
+        global respondent
+        respondent.append(request.GET['age'])
+        respondent.append(request.GET['gender'])
+        respondent.append(request.GET['education'])
+        return redirect('main')
+    else:
+        return render(request, 'demographics.html')
 
 
 def main(request):
@@ -35,13 +45,21 @@ def main(request):
 
 def end(request, num):
     global userResponses
+    global respondent
 
     if num == "":
+        # user has no responses, should enforce user to pick a choice at front end
         print("invalid num")
     else:
         userResponses = [c for c in num]
+        #TODO record userReponse and user data
         print(userResponses)
+        print(respondent)
 
+    return redirect("thank")
+
+
+def thank(request):
     return render(request, "end.html")
 
 
