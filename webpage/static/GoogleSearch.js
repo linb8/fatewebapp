@@ -17,6 +17,7 @@ var count = 0;
    let timerMode = false;
    let seconds = 15;
    let seen = [];
+   let timeSpent = 15;
    const ALGORITHM = new Array("0g", "01gfp", "05gfp", "09gfp");
 
    window.addEventListener("load", init);
@@ -44,7 +45,7 @@ var count = 0;
          if (set == "0g" || set == "01gfp") {
            index = 0;
          } else {
-           index = 10;
+           index = 11;
          }
        }
      }
@@ -53,17 +54,8 @@ var count = 0;
    function updateResults() {
      index++;
      count++;
-     if (index <= 10) {
+     if (index <= 10 || (index > 10 && index <= 20)) {
        populateResults();
-       if (index == 10) {
-          generateRandom();
-       }
-     }
-     if (index > 10 && index <= 20) {
-       populateResults();
-       if (index == 20) {
-          generateRandom();
-       }
      }
      if (count == 41) {
        window.location = window.location + "end/" + userResponse;
@@ -76,6 +68,9 @@ var count = 0;
          clearInterval(timerId);
          timerId = null;
          seconds = 15;
+         timeSpent = 15;
+         let searchEngine = document.getElementById("search-word");
+         userResponse = set + " " + searchEngine.value + " -1 " + timeSpent;
          document.querySelector(".submit").disabled = true;
          updateResults();
        } else {
@@ -124,24 +119,11 @@ var count = 0;
      responseData = data;
      updateResults();
    }
-   /*
-   function updateResults() {
-     //console.log(userResponse);
-     index = index + 1;
-     if (index <= 20) {
-       //only 20 queries
-       //generateResult();
-       populateResults();
-     } else {
-        window.location = window.location + "end/" + userResponse;    // redirect
-     }
-   }
-   */
 
    function populateResults() {
      // update search box placeholder
      let searchEngine = document.getElementById("search-word");
-     searchEngine.placeholder = responseData[index][1][0];
+     searchEngine.value = responseData[index][1][0];
 
      // display results, but clear all previous results first
      let resultInfo = document.querySelector(".resultInfo");
@@ -192,23 +174,29 @@ var count = 0;
   }
 
   function submit_form() {
+    if (count == 11 || count == 21 || count == 31) {
+      generateRandom();
+    }
     let submitButton = document.querySelector(".submit");
     submitButton.disabled = true;
+    let searchEngine = document.getElementById("search-word");
+    timeSpent = timeSpent - seconds;
     console.log("time took:" + seconds)
-    //console.log("form submitted")
     //return selected rating value
     var rate = document.getElementsByName('rating');
     for(var i=1; i<rate.length; i++){
         if(rate[i].checked){
             console.log("user selects" + " " +i)
-            userResponse += i.toString() //number
+            userResponse = set + " " + searchEngine.value + " " + i + " "+ timeSpent;
+            console.log(userResponse);
             //clear cache
             rate[i].checked = false;
         }
     }
     clearInterval(timerId)
     timerId = null;
-    seconds = 16;
+    seconds = 15;
+    timeSpent = 15;
     updateResults();
   }
 })();
