@@ -58,7 +58,7 @@ var count = 0;
        populateResults();
      }
      if (count == 41) {
-       window.location = window.location + "end/" + userResponse;
+       window.location = window.location + "end/" + userResponse.trim();
      }
    }
 
@@ -70,7 +70,7 @@ var count = 0;
          seconds = 15;
          timeSpent = 15;
          let searchEngine = document.getElementById("search-word");
-         userResponse = set + " " + searchEngine.value + " -1 " + timeSpent;
+         userResponse += set + " " + searchEngine.value + " -1 " + timeSpent + " ";
          document.querySelector(".submit").disabled = true;
          updateResults();
        } else {
@@ -187,7 +187,7 @@ var count = 0;
     for(var i=1; i<rate.length; i++){
         if(rate[i].checked){
             console.log("user selects" + " " +i)
-            userResponse = set + " " + searchEngine.value + " " + i + " "+ timeSpent;
+            userResponse += set + " " + searchEngine.value + " " + i + " "+ timeSpent + " ";
             console.log(userResponse);
             //clear cache
             rate[i].checked = false;
