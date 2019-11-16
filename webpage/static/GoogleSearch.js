@@ -1,4 +1,3 @@
-
 // Global Variable
 var index = 0;
 var responseData;
@@ -6,10 +5,19 @@ var userResponse = "";
 var startTime;
 var endTime;
 var timeRemaining;
-var seconds;
+var choice = 4;
+var count = 0;
 
  (function() {
    "use strict";
+
+   let timerId = null;
+   let set = "";
+   let timerMode = false;
+   let seconds = 15;
+   let seen = [];
+   let timeSpent = 15;
+   const ALGORITHM = new Array("0g", "01gfp", "05gfp", "09gfp");
 
    window.addEventListener("load", init);
 
@@ -21,40 +29,86 @@ var seconds;
      for (let i = 0; i < ratingButton.length; i++) {
        ratingButton[i].addEventListener("click", chooseRating);
      }
+     generateRandom();
      fillColumn();
+   }
+
+   function generateRandom() {
+     let randomCount = Math.floor(Math.random() * ALGORITHM.length);
+     if (seen.includes(randomCount) && seen.length != 4) {
+       generateRandom();
+     } else {
+       if (seen.length != 4) {
+         seen.push(randomCount);
+         set = ALGORITHM[randomCount];
+         if (set == "0g" || set == "01gfp") {
+           index = 0;
+         } else {
+           index = 11;
+         }
+       }
+     }
+   }
+
+   function updateResults() {
+     index++;
+     count++;
+     if (index <= 10 || (index > 10 && index <= 20)) {
+       populateResults();
+     }
+     if (count == 41) {
+       window.location = window.location + "end/" + userResponse.trim();
+     }
+   }
+
+   function startTimer() {
+     timerId = setInterval(function() {
+       if (seconds == 0) {
+         clearInterval(timerId);
+         timerId = null;
+         seconds = 15;
+         timeSpent = 15;
+         let searchEngine = document.getElementById("search-word");
+         let searchEngineValue = searchEngine.value.replace(/\s/g, "");
+         userResponse += set + " " + searchEngineValue + " -1 " + timeSpent + " ";
+         document.querySelector(".submit").disabled = true;
+         updateResults();
+       } else {
+         timerMode = true;
+         seconds--;
+       }
+       let time = document.getElementById("clock");
+       time.textContent = seconds;
+     }, 1000)
    }
 
    /*
-   function submitResult() {
-     let submitButton = document.querySelector(".submit");
-     submitButton.disabled = true;
-     fillColumn();
-   }
-   */
    function start() {
     startTime = new Date();
     couting();
-  };
-
+  }
   function couting() {
     endTime = new Date();
     var timeDiff = endTime - startTime; //in ms
     timeDiff /= 1000;
     // get seconds
     seconds = Math.round(timeDiff);
-    console.log(seconds + " seconds");
+    //console.log(seconds + " seconds");
     timeRemaining = 15 - seconds;
     document.getElementById("clock").innerHTML = timeRemaining;
-    if(timeRemaining == 0){
+    if (timeRemaining == 0) {
+      clearInterval(timerId);
+      timerId = null;
+      document.querySelector(".submit").disabled = true;
       updateResults();
       console.error("time out");;
     }
-    setTimeout(function(){
+    timerId = setInterval(function(){
       couting()
     //do what you need here
     }, 1000);
   }
-
+  */
    function chooseRating() {
      let submitButton = document.querySelector(".submit");
      submitButton.disabled = false;
@@ -65,23 +119,10 @@ var seconds;
      updateResults();
    }
 
-   function updateResults() {
-     console.log(userResponse);
-     index = index + 1;
-     if (index <= 20) {
-       //only 20 queries
-        populateResults();
-     } else {
-        window.location = window.location + "end/" + userResponse;    // redirect
-     }
-   }
-
    function populateResults() {
-      //disable the button
-     document.querySelector(".submit").disabled = true;
      // update search box placeholder
      let searchEngine = document.getElementById("search-word");
-     searchEngine.placeholder = responseData[index][1][0];
+     searchEngine.value = responseData[index][1][0];
 
      // display results, but clear all previous results first
      let resultInfo = document.querySelector(".resultInfo");
@@ -94,22 +135,22 @@ var seconds;
        link.className = "url";
        description.className = "description";
        title.innerHTML = responseData[index][i][1];
-       title.href = responseData[index][i][2];
-       title.target = "_blank";
        link.innerHTML = responseData[index][i][2];
        description.innerHTML = responseData[index][i][3];
        resultInfo.appendChild(title);
        resultInfo.appendChild(link);
        resultInfo.appendChild(description);
-       //start couting
      }
-     start();
+
+     //start counting
+     startTimer();
    }
 
   function fillColumn() {
     let column = document.querySelector(".resultInfo");
     column.innerHTML = "";
-    let url = "http://django-env.spbbwp7akp.us-west-2.elasticbeanstalk.com/01gfp/results/";
+    let currentUrl = window.location.href;
+    let url = currentUrl.substring(0, currentUrl.length - 5) + set + "/results/";
     fetch(url)
       .then(checkStatus)
       .then(JSON.parse)
@@ -131,19 +172,31 @@ var seconds;
     }
   }
 
-  function submit_form(){
-    console.log("time took:" + seconds)
-    //console.log("form submitted")
+  function submit_form() {
+    if (count == 11 || count == 21 || count == 31) {
+      generateRandom();
+    }
+    let submitButton = document.querySelector(".submit");
+    submitButton.disabled = true;
+    let searchEngine = document.getElementById("search-word");
+    let searchEngineValue = searchEngine.value.replace(/\s/g, "");
+    timeSpent = timeSpent - seconds;
+    //console.log("time took:" + seconds)
     //return selected rating value
     var rate = document.getElementsByName('rating');
     for(var i=1; i<rate.length; i++){
         if(rate[i].checked){
             //console.log("user selects" + " " +i)
-            userResponse += i.toString() //number
+            userResponse += set + " " + searchEngineValue + " " + i + " "+ timeSpent + " ";
+            //console.log(userResponse);
             //clear cache
             rate[i].checked = false;
         }
     }
+    clearInterval(timerId)
+    timerId = null;
+    seconds = 15;
+    timeSpent = 15;
     updateResults();
   }
 })();
