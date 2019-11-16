@@ -8,6 +8,7 @@ import json
 import sys
 sys.path.insert(0, '../src')
 from extraction import *
+from write import *
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
@@ -71,10 +72,9 @@ def end(request, num):
 def thank(request):
     if 'mturk-id' in request.GET:
         global respondent
-        respondent.append(request.GET['mturk-id'])
-        # TODO record userReponse and user data
-        print(userResponses)
-        print(respondent)
+        ID = request.GET['mturk-id']
+        respondent.append(ID)
+        writeToCSVFiles(respondent, userResponses,ID)
 
     return render(request, "end.html")
 

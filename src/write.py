@@ -7,6 +7,7 @@ def writeToCSVFiles(respondent, rating, ID):
     writeToRespondent(respondent)
     writeToRating(rating, ID, 4)
 
+
 # ['age','gender','education level','ip address', 'mturk-id']
 def writeToRespondent(respondent):
     if(len(respondent) != 5):
@@ -24,7 +25,7 @@ def writeToRespondent(respondent):
 # ['mturk-id','algorithm','query','rating','time spent']
 def writeToRating(rating, ID, num):
     if (len(rating) != 160):
-        print("Respondent data misMatch. Expected: 160, Given: " + str(len(rating)))
+        print("Rating data misMatch. Expected: 160, Given: " + str(len(rating)))
         return
 
     rating = [rating[x:x+num] for x in range(0, len(rating), 4)]
