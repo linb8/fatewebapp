@@ -70,7 +70,8 @@ var count = 0;
          seconds = 15;
          timeSpent = 15;
          let searchEngine = document.getElementById("search-word");
-         userResponse += set + " " + searchEngine.value + " -1 " + timeSpent + " ";
+         let searchEngineValue = searchEngine.value.replace(/\s/g, "");
+         userResponse += set + " " + searchEngineValue + " -1 " + timeSpent + " ";
          document.querySelector(".submit").disabled = true;
          updateResults();
        } else {
@@ -180,6 +181,7 @@ var count = 0;
     let submitButton = document.querySelector(".submit");
     submitButton.disabled = true;
     let searchEngine = document.getElementById("search-word");
+    let searchEngineValue = searchEngine.value.replace(/\s/g, "");
     timeSpent = timeSpent - seconds;
     console.log("time took:" + seconds)
     //return selected rating value
@@ -187,7 +189,7 @@ var count = 0;
     for(var i=1; i<rate.length; i++){
         if(rate[i].checked){
             console.log("user selects" + " " +i)
-            userResponse += set + " " + searchEngine.value + " " + i + " "+ timeSpent + " ";
+            userResponse += set + " " + searchEngineValue + " " + i + " "+ timeSpent + " ";
             console.log(userResponse);
             //clear cache
             rate[i].checked = false;
