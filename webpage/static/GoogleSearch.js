@@ -183,14 +183,14 @@ var count = 0;
     let searchEngine = document.getElementById("search-word");
     let searchEngineValue = searchEngine.value.replace(/\s/g, "");
     timeSpent = timeSpent - seconds;
-    console.log("time took:" + seconds)
+    //console.log("time took:" + seconds)
     //return selected rating value
     var rate = document.getElementsByName('rating');
     for(var i=1; i<rate.length; i++){
         if(rate[i].checked){
-            console.log("user selects" + " " +i)
+            //console.log("user selects" + " " +i)
             userResponse += set + " " + searchEngineValue + " " + i + " "+ timeSpent + " ";
-            console.log(userResponse);
+            //console.log(userResponse);
             //clear cache
             rate[i].checked = false;
         }

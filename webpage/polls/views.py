@@ -18,10 +18,21 @@ listOfStrings = ['0g', '0gf', '0gfp', '01g', '01gf', '01gfp','05g', '05gf', '05g
 algorithm = ''
 
 # user responses
+# ['algorithm','query','rating','time spent']
 userResponses = []
 
 # user stats
+# ['age','gender','education level','ip address', 'mturk-id']
 respondent = []
+
+def get_ip_address(request):
+    """ use requestobject to fetch client machine's IP Address """
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR', None)
+    return ip
 
 
 def home(request):
@@ -34,6 +45,7 @@ def demographics(request):
         respondent.append(request.GET['age'])
         respondent.append(request.GET['gender'])
         respondent.append(request.GET['education'])
+        respondent.append(get_ip_address(request))
         return redirect('main')
     else:
         return render(request, 'demographics.html')
@@ -51,15 +63,19 @@ def end(request, num):
         # user has no responses, should enforce user to pick a choice at front end
         print("invalid num")
     else:
-        userResponses = [c for c in num]
-        #TODO record userReponse and user data
-        print(userResponses)
-        print(respondent)
+        userResponses = num.split()
 
     return redirect("thank")
 
 
 def thank(request):
+    if 'mturk-id' in request.GET:
+        global respondent
+        respondent.append(request.GET['mturk-id'])
+        # TODO record userReponse and user data
+        print(userResponses)
+        print(respondent)
+
     return render(request, "end.html")
 
 
