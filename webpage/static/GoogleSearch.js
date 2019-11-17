@@ -45,7 +45,7 @@ var count = 0;
          if (set == "0g" || set == "01gfp") {
            index = 0;
          } else {
-           index = 11;
+           index = 10;
          }
        }
      }
@@ -54,6 +54,10 @@ var count = 0;
    function updateResults() {
      index++;
      count++;
+     if (count == 11 || count == 21 || count == 31) {
+       generateRandom();
+       index++;
+     }
      if (index <= 10 || (index > 10 && index <= 20)) {
        populateResults();
      }
@@ -175,9 +179,6 @@ var count = 0;
   }
 
   function submit_form() {
-    if (count == 11 || count == 21 || count == 31) {
-      generateRandom();
-    }
     let submitButton = document.querySelector(".submit");
     submitButton.disabled = true;
     let searchEngine = document.getElementById("search-word");
