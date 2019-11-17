@@ -16,6 +16,10 @@ h2 {
   text-align: center;
   padding-top: 10px;
 }
+
+.hidden {
+  display: none;
+}
 </style>
 </head>
 <body>
@@ -33,16 +37,25 @@ h2 {
   <div class="mturk-id">
   <form>
     <label for="mturk-id">Please enter your <b>MTurk ID</b> below:</label><br>
-    <input type="text" name="mturk-id" required size="20">
-    <input type="submit" value="Submit">
+    <input type="text" name="mturk-id" required size="20" id="text-box">
+    <input type="submit" value="Submit" id="submit" onclick="disable()">
   </form>
-    <p>
+    <p class="hidden" id="alert">
       Please go back to Mechanical Turk and enter the following string. We will verify
       your responses and this string, and if it all looks good, your payment will
       be processed within the next three days.
     </p>
   </div>
 </main>
-
+<script>
+    function disable() {
+        let alert = document.getElementById("alert");
+        alert.classList.remove("hidden");
+        let textBox = document.getElementById("text-box");
+        textBox.disabled = true;
+        let submit = document.getElementById("submit");
+        submit.disabled = true;
+    }
+</script>
 </body>
 </html>
