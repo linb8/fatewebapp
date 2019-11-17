@@ -6,7 +6,15 @@ h2 {
   text-align: center;
   color: #411B8D;
 }
-
+.submit {
+  margin: 1em;
+  color: white;
+  text-align: center;
+  font-size: 1em;
+  border-radius: 5%;
+  background: white;
+  color: #888888;
+}
 #thank-you {
   margin-left: 100px;
   margin-right: 100px;
@@ -37,8 +45,8 @@ h2 {
   <div class="mturk-id">
   <form>
     <label for="mturk-id">Please enter your <b>MTurk ID</b> below:</label><br>
-    <input type="text" name="mturk-id" required size="20" id="text-box">
-    <input type="submit" value="Submit" id="submit" onclick="disable()">
+    <input type="text" name="mturk-id" size="20" id="text-box" required style="margin: 2rem; border-radius: 3.2rem;"> <br>
+    <input class="submit" type="submit" value="Submit" id="submit" onclick="disable()">
   </form>
     <p class="hidden" id="alert">
       Please go back to Mechanical Turk and enter the following string. We will verify
@@ -49,6 +57,10 @@ h2 {
 </main>
 <script>
     function disable() {
+        var pass = confirm("Please confirm your Mturk ID is correct!!!")
+        if (!pass){
+          return false
+        }
         let alert = document.getElementById("alert");
         alert.classList.remove("hidden");
         let textBox = document.getElementById("text-box");
