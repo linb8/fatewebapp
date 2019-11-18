@@ -10,20 +10,14 @@
 
   <body>
     <div class="search">
-      <img id="uw_logo" class="uw_logo_after" src="{% static 'Image/UWLogo.png' %}" alt="University of Washington">
-      <div class="searchBar_after" id="searchBar">
+      <div class="searchBar" id="searchBar">
         <img class="search_icon" src="{% static 'Image/search.png' %}" alt="search_icon">
         <input id="search-word" type="text" name="search" disabled>
       </div>
+    </div>
       <div class="searchResult">
         <div class="resultInfo">
         </div>
-        <!--
-        <div class="resultInfo">
-          <div class="title">title</div>
-          <div class="description">description</div>
-        </div>
-        -->
       </div>
         <form id="form" class="form" name="rating" method="post">
           <strong>Select rating: </strong>
@@ -49,10 +43,10 @@
               <span class="mark"><strong class="number">5</strong></span>
             </label>
           </div>
-        <strong id="clock" style="color: 000000;"></strong>
-        <button class="submit" type="button">Submit</button>
+        <p><strong id="clock" style="color: 000000;">15</strong></p>
         </form>
-      </div>
-    </search>
+        <div class="button_div">
+          <button class="submit" type="button">Submit</button>
+        </div>
   </body>
 </html>

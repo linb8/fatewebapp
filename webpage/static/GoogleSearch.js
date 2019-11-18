@@ -1,3 +1,4 @@
+
 // Global Variable
 var index = 0;
 var responseData;
@@ -44,7 +45,7 @@ var count = 0;
          if (set == "0g" || set == "01gfp") {
            index = 0;
          } else {
-           index = 11;
+           index = 10;
          }
        }
      }
@@ -53,6 +54,10 @@ var count = 0;
    function updateResults() {
      index++;
      count++;
+     if (count == 11 || count == 21 || count == 31) {
+       generateRandom();
+       index++;
+     }
      if (index <= 10 || (index > 10 && index <= 20)) {
        populateResults();
      }
@@ -87,6 +92,7 @@ var count = 0;
     startTime = new Date();
     couting();
   }
+
   function couting() {
     endTime = new Date();
     var timeDiff = endTime - startTime; //in ms
@@ -137,6 +143,10 @@ var count = 0;
        title.innerHTML = responseData[index][i][1];
        link.innerHTML = responseData[index][i][2];
        description.innerHTML = responseData[index][i][3];
+       //the title should be clickable
+       title.href = responseData[index][i][2];;
+       // open the link in a new window
+       title.target = "_blank";
        resultInfo.appendChild(title);
        resultInfo.appendChild(link);
        resultInfo.appendChild(description);
@@ -173,9 +183,6 @@ var count = 0;
   }
 
   function submit_form() {
-    if (count == 11 || count == 21 || count == 31) {
-      generateRandom();
-    }
     let submitButton = document.querySelector(".submit");
     submitButton.disabled = true;
     let searchEngine = document.getElementById("search-word");
