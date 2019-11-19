@@ -43,6 +43,7 @@ def home(request):
 def demographics(request):
     if 'age' in request.GET:
         global respondent
+        respondent.clear()
         respondent.append(request.GET['age'])
         respondent.append(request.GET['gender'])
         respondent.append(request.GET['education'])
