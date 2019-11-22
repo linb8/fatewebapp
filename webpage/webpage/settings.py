@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_user_agents',
 ]
 
 MIDDLEWARE = [
@@ -126,4 +127,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
-STATIC_ROOT = "C:/Users/yanyu/PycharmProjects/Django/webpage/webpage/static"
+STATIC_ROOT = "C:/Users/yukai/Desktop/Research/Django/webpage/webpage/static"
+#"C:/Users/yanyu/PycharmProjects/Django/webpage/webpage/static"
