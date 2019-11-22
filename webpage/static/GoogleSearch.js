@@ -15,9 +15,9 @@ var count = 0;
    let timerId = null;
    let set = "";
    let timerMode = false;
-   let seconds = 15;
+   let seconds = 20;
    let seen = [];
-   let timeSpent = 15;
+   let timeSpent = 20;
    const ALGORITHM = new Array("0g", "01gfp", "05gfp", "09gfp");
 
    window.addEventListener("load", init);
@@ -71,12 +71,21 @@ var count = 0;
        if (seconds == 0) {
          clearInterval(timerId);
          timerId = null;
-         seconds = 15;
-         timeSpent = 15;
+         seconds = 20;
+         timeSpent = 20;
          let searchEngine = document.getElementById("search-word");
          let searchEngineValue = searchEngine.value.replace(/\s/g, "");
          userResponse += set + " " + searchEngineValue + " -1 " + timeSpent + " ";
          document.querySelector(".submit").disabled = true;
+         var rate = document.getElementsByName('rating');
+         for(var i=1; i<rate.length; i++) {
+             if (rate[i].checked) {
+                 //console.log("user selects" + " " +i)
+                 //console.log(userResponse);
+                 //clear cache
+                 rate[i].checked = false;
+             }
+         }
          updateResults();
        } else {
          timerMode = true;
@@ -198,8 +207,8 @@ var count = 0;
     }
     clearInterval(timerId)
     timerId = null;
-    seconds = 15;
-    timeSpent = 15;
+    seconds = 20;
+    timeSpent = 20;
     updateResults();
   }
 })();
