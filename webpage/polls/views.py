@@ -25,6 +25,7 @@ userResponses = []
 # ['age','gender','education level','ip address', 'mturk-id']
 respondent = []
 
+
 def get_ip_address(request):
     """ use requestobject to fetch client machine's IP Address """
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
@@ -34,6 +35,16 @@ def get_ip_address(request):
         ip = request.META.get('REMOTE_ADDR', None)
     return ip
 
+
+def get_browser_info(request):
+    browser_info = request.user_agent.os.family + " " + request.user_agent.browser.family + " "
+    if request.user_agent.is_pc:
+        browser_info += "PC"
+    else:
+        browser_info += "Mobile"
+    return browser_info
+
+
 def instructions(request):
     return render(request, 'instructions.html')
 
@@ -41,6 +52,7 @@ def instructions(request):
 def home(request):
     #return HttpResponse(dir_path)
     return render(request, "home.html")
+
 
 def demographics(request):
     if 'age' in request.GET:
@@ -50,6 +62,7 @@ def demographics(request):
         respondent.append(request.GET['gender'])
         respondent.append(request.GET['education'])
         respondent.append(get_ip_address(request))
+        respondent.append(get_browser_info(request))
         return redirect('main')
     else:
         return render(request, 'demographics.html')
