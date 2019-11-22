@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
 <head>
 <style>
-  h1, div {
+  h1, div, img {
     text-align: center;
   }
 
@@ -38,10 +39,12 @@
   <h1>Instructions</h1>
   <div>
     <p>
-      A search query and the top 5 results from it are shown below. Please rate
-      the results on a scale of 1-5 to indicate how good they are. You have 20 seconds.
+      A search query and the top 5 results from it are shown below. You will need to rate
+      the results on a scale of 1-5 to indicate how good they are. You will have 20 seconds
+      for each set of results.
     </p>
   </div>
+  <img src="{% static 'Image/instructions.png' %}" alt="demo">
   <div id="terms">
     <button class="button" name='begin'>Begin</button>
   </div>
