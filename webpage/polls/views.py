@@ -34,6 +34,9 @@ def get_ip_address(request):
         ip = request.META.get('REMOTE_ADDR', None)
     return ip
 
+def instructions(request):
+    return render(request, 'instructions.html')
+
 
 def home(request):
     #return HttpResponse(dir_path)
