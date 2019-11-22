@@ -18,7 +18,7 @@ var count = 0;
    let seconds = 20;
    let seen = [];
    let timeSpent = 20;
-   const ALGORITHM = new Array("0g", "01gfp", "05gfp", "09gfp");
+   const ALGORITHM = new Array("0g", "03gfp", "05gfp", "09gfp");
 
    window.addEventListener("load", init);
 
@@ -42,7 +42,7 @@ var count = 0;
        if (seen.length != 4) {
          seen.push(randomCount);
          set = ALGORITHM[randomCount];
-         if (set == "0g" || set == "01gfp") {
+         if (set == "0g" || set == "03gfp") {
            index = 0;
          } else {
            index = 10;
