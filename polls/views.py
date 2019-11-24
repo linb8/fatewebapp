@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
+from polls.models import *
 from django.http import HttpResponse, HttpResponseRedirect
 from django.http import JsonResponse
 import os
@@ -22,7 +23,7 @@ algorithm = ''
 userResponses = []
 
 # user stats
-# ['age','gender','education level','ip address', 'mturk-id']
+# ['age','gender','education level','ip address', 'browser-info', 'mturk-id']
 respondent = []
 
 
@@ -45,10 +46,6 @@ def get_browser_info(request):
     return browser_info
 
 
-def instructions(request):
-    return render(request, 'instructions.html')
-
-
 def home(request):
     #return HttpResponse(dir_path)
     return render(request, "home.html")
@@ -68,13 +65,16 @@ def demographics(request):
         return render(request, 'demographics.html')
 
 
+def instructions(request):
+    return render(request, 'instructions.html')
+
+
 def main(request):
     return render(request, "fate.html")
 
 
 def end(request, num):
     global userResponses
-    global respondent
 
     if num == "":
         # user has no responses, should enforce user to pick a choice at front end
@@ -90,7 +90,7 @@ def thank(request):
         global respondent
         ID = request.GET['mturk-id']
         respondent.append(ID)
-        writeToCSVFiles(respondent, userResponses,ID)
+        write(ID)
 
     return render(request, "end.html")
 
@@ -102,3 +102,44 @@ def handle(request, query):
         algorithm = query
         queryResults = extractFromFile(query + ".txt", 5)
     return JsonResponse(queryResults)
+
+
+def write(user_id):
+    global userResponses
+    global respondent
+
+    # check length, if doesn't match, quit
+    # comment out the following code during testing
+    if len(respondent) != 6:
+        print("Respondent data misMatch. Expected: 6, Given: " + str(len(respondent)))
+        return
+
+    if len(userResponses) != 160:
+        print("Rating data misMatch. Expected: 160, Given: " + str(len(userResponses)))
+        return
+
+    # writeToCSVFiles(respondent, userResponses,ID)
+
+    # ['age','gender','education level','ip address', 'browser-info', 'mturk-id']
+    user = UserInfo(mturk_id=user_id,
+                    ip_address=respondent[3],
+                    browser_info=respondent[4],
+                    age=respondent[0],
+                    gender=respondent[1],
+                    education=respondent[2])
+    user.save()
+
+    # ['algorithm','query','rating','time spent']
+    userResponses = [userResponses[x:x + 4] for x in range(0, len(userResponses), 4)]
+    for i in range(40):
+        current = userResponses[i]
+        response = Response(mturk_id=user_id,
+                            algorithm=current[0],
+                            query=current[1],
+                            rating=current[2],
+                            time_spent=current[3])
+        response.save()
+
+
+
+
