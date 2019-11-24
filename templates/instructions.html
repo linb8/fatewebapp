@@ -46,10 +46,15 @@
   </div>
   <img src="{% static 'Image/instructions.png' %}" alt="demo">
   <div id="terms">
-    <button class="button" name='begin'>Begin</button>
+    <button class="button" name='begin' onclick='redirect()'>Begin</button>
   </div>
   </main>
+
 </body>
 <script>
+    function redirect() {
+        var link = window.location.href
+        window.location = link.substring(0, link.length - 13) + "main/";
+    }
 </script>
 </html>
