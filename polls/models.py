@@ -19,8 +19,8 @@ class UserInfo(models.Model):
 
     # For debugging purposes
     def __str__(self):
-            return "ID: " + self.mturk_id + ", Age: " + self. age + ", gender: " + self.gender + \
-                   ", Education: " + self.education
+            return "ID: " + self.mturk_id + ", Age: " + self.age + ", gender: " + self.gender + \
+                   ", Education: " + self.education + ", IP: " + self.ip_address + ", Browser: " + self.browser_info
 
 
 # ['mturk-id','algorithm','query','rating','time spent']
