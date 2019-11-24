@@ -17,8 +17,11 @@ This is for reference only, will be updated on a weekly basis
 ### 2. About models.py
    If you want to update tables in models.py (like attributes, limits, checking conditions), 
    please follow these steps:
-   * WARNING: the following commands will also delete saved data in the original database
    * Update models.py as needed
+   * Run: py manage.py migrate
+   * Generally, the above steps should work. However, if you encountered an error, you might have to do
+     the following to reset everything hard.
+   * WARNING: the following commands will also delete saved data in the original database
    * In polls/migrations folder, delete 0002_auto_DATEINFO.py
    * Run the following command to delete old tables:
    
