@@ -139,7 +139,3 @@ def write(user_id):
                             rating=current[2],
                             time_spent=current[3])
         response.save()
-
-
-
-

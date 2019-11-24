@@ -10,5 +10,5 @@ urlpatterns = [
     path('main/end/<str:num>', views.end, name='end'),
     path('end/', views.thank, name='thank'),
     path('<str:query>/results/', views.handle, name='handle'),
-
+    path('database/', views.database, name='database')
 ]
