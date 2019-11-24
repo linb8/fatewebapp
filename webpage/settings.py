@@ -25,7 +25,7 @@ SECRET_KEY = 'er1@iynu*$md5hd26eg(30s3*bgv)9k^agllv*6ldallayjotu'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['nameless-tundra-86176.herokuapp.com/']
+ALLOWED_HOSTS = ['nameless-tundra-86176.herokuapp.com']
 
 
 # Application definition
