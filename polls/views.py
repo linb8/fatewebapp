@@ -63,7 +63,7 @@ def demographics(request):
         respondent.append(request.GET['education'])
         respondent.append(get_ip_address(request))
         respondent.append(get_browser_info(request))
-        return redirect('main')
+        return redirect('instructions')
     else:
         return render(request, 'demographics.html')
 
