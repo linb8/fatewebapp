@@ -6,7 +6,7 @@ import os
 import json
 
 import sys
-sys.path.insert(0, '../src')
+sys.path.insert(0, './src')
 from extraction import *
 from write import *
 

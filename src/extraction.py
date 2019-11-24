@@ -49,14 +49,14 @@ for each qid, snippet1 corresponds to the first snippet in the reranked list
 
 # query 82 is nonexistent
 def extractFromFile(file_name, num_snippets):
-    dirname = os.path.dirname(__file__)
-    filename = os.path.join(dirname, "../SampleData/", file_name)
-    file = open(filename, "r")
+    #dirname = os.path.dirname(__file__)
+    #filename = os.path.join(dirname, "./SampleData/", file_name)
+    file = open('./SampleData/' + file_name, "r")
     lines = file.readlines()
     file.close()
 
-    myPickle = os.path.join(dirname, "../src/snippet.pickle")
-    with open(myPickle, 'rb') as fr:
+    #myPickle = os.path.join(dirname, "./src/snippet.pickle")
+    with open('./src/snippet.pickle', 'rb') as fr:
         query_snippet_list = pickle.load(fr)
 
     results = {}

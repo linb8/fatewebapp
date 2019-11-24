@@ -1,62 +1,60 @@
-/* search query */
 .search{
-  align-content: center;
-  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  margin-top: 1%;
+  flex-direction: column;
+  align-items: center;
 }
 .searchBar{
   display:flex;
   flex-direction: row;
   background-color: #ECECEC;
-  border-radius: 3.4em;
-  width: 80%;
-  height: 3em;
+  border-radius: 3.4rem;
+  border: 0.1rem solid #ECECEC;
+  width: 60%;
+  height: 3.6rem;
   justify-content: space-around;
   align-items:  center;
-  flex-direction: row;
-  border: 0.1em solid #ECECEC;
 }
-
-.search_icon{
-  height: 1.5em;
-  width: 1.5em;
-  padding: 0.5em 1em 0.5rem 0.5em;
-  border-right: 0.1em solid #888888;
+.searchBar img{
+  height: 1.5rem;
+  width: 1.5rem;
+  padding: 0.5rem 1rem 0.5rem 0.5rem;
+  border-right: 0.1rem solid #888888;
 }
-
-#search-word{
-  font-size: 1.2em;
+.searchBar input{
+  font-size: 1.5rem;
+  font-weight: 500;
   background-color: #ECECEC;
+  height: 90%;
   width: 90%;
   border: none;
 }
-
-.resultInfo{
-  padding-left: 3rem;
-  padding-right: 8rem;
+.uw_logo{
+  width: 15rem;
+  height: 15rem;
+}
+.searchResult{
+  margin: 1rem 1rem 1rem 1rem;
+  width: 100%;
+  height: 30rem;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
 }
-
 .resultInfo{
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: flex-start;
 }
-
-#form{
-  padding-top: 3.5rem;
+.form{
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-}
-
-.button_div{
-  text-align: center;
 }
 .submit{
   position: relative;
@@ -71,12 +69,11 @@
   text-decoration: none;
   overflow: hidden;
   cursor: pointer;
-  margin: 1.5rem;
+  margin: 2rem 2rem 2rem 2rem;
 }
-
 .submit:after {
   content: "";
-  background: rgb(56, 48, 110);
+  background: #4CAF50;
   display: block;
   position: absolute;
   padding-top: 300%;
@@ -93,14 +90,12 @@
   opacity: 1;
   transition: 0s;
 }
-
 .rating{
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
 }
-
 /* The Radio*/
 .container {
   cursor: pointer;
@@ -157,32 +152,35 @@
 	border-radius: 50%;
 	background: white;
 }
-
+/*.title, .url, .description{
+  margin: 0.5rem 0.5rem 5rem 5rem
+} */
 .title{
-  margin-top: 0.5em;
-  font-size: 1.8em;
+  font-size: 1.8rem;
   font-weight: bold;
-  color: blue;
-  text-decoration: underline;
+  color: #000000;
 }
-
 .url{
-  font-size: 1em;
-  color: #008000;
+  font-size: 1rem;
+  color: blue;
 }
-
 .description{
-  font-size: 1em;
-  color: #565656;
+  font-size: 1.2rem;
+  color: #888888;
 }
-
+.info{
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+}
 .result{
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: flex-start;
 }
-
-strong{
-  font-size: 1em;
+body{
+  overflow-x: hidden;
 }
