@@ -18,6 +18,7 @@ var count = 0;
    let seconds = 20;
    let seen = [];
    let timeSpent = 20;
+   let numQuestions = 40;
    const ALGORITHM = new Array("0g", "03gfp", "05gfp", "09gfp");
 
    window.addEventListener("load", init);
@@ -73,6 +74,9 @@ var count = 0;
          timerId = null;
          seconds = 20;
          timeSpent = 20;
+         let questionCounter = document.getElementById("questions");
+         numQuestions--;
+         questionCounter.innerHTML = " " + numQuestions;
          let searchEngine = document.getElementById("search-word");
          let searchEngineValue = searchEngine.value.replace(/\s/g, "");
          userResponse += set + " " + searchEngineValue + " -1 " + timeSpent + " ";
@@ -80,9 +84,6 @@ var count = 0;
          var rate = document.getElementsByName('rating');
          for(var i=1; i<rate.length; i++) {
              if (rate[i].checked) {
-                 //console.log("user selects" + " " +i)
-                 //console.log(userResponse);
-                 //clear cache
                  rate[i].checked = false;
              }
          }
@@ -96,34 +97,6 @@ var count = 0;
      }, 1000)
    }
 
-   /*
-   function start() {
-    startTime = new Date();
-    couting();
-  }
-
-  function couting() {
-    endTime = new Date();
-    var timeDiff = endTime - startTime; //in ms
-    timeDiff /= 1000;
-    // get seconds
-    seconds = Math.round(timeDiff);
-    //console.log(seconds + " seconds");
-    timeRemaining = 15 - seconds;
-    document.getElementById("clock").innerHTML = timeRemaining;
-    if (timeRemaining == 0) {
-      clearInterval(timerId);
-      timerId = null;
-      document.querySelector(".submit").disabled = true;
-      updateResults();
-      console.error("time out");;
-    }
-    timerId = setInterval(function(){
-      couting()
-    //do what you need here
-    }, 1000);
-  }
-  */
    function chooseRating() {
      let submitButton = document.querySelector(".submit");
      submitButton.disabled = false;
@@ -190,6 +163,9 @@ var count = 0;
   function submit_form() {
     let submitButton = document.querySelector(".submit");
     submitButton.disabled = true;
+    let questionCounter = document.getElementById("questions");
+    numQuestions--;
+    questionCounter.innerHTML = " " + numQuestions;
     let searchEngine = document.getElementById("search-word");
     let searchEngineValue = searchEngine.value.replace(/\s/g, "");
     timeSpent = timeSpent - seconds;
@@ -198,10 +174,7 @@ var count = 0;
     var rate = document.getElementsByName('rating');
     for(var i=1; i<rate.length; i++){
         if(rate[i].checked){
-            //console.log("user selects" + " " +i)
             userResponse += set + " " + searchEngineValue + " " + i + " "+ timeSpent + " ";
-            //console.log(userResponse);
-            //clear cache
             rate[i].checked = false;
         }
     }
