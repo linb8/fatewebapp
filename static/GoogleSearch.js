@@ -91,6 +91,7 @@ var count = 0;
        } else {
          timerMode = true;
          seconds--;
+         chooseRating();3
        }
        let time = document.getElementById("clock");
        time.textContent = seconds;
@@ -98,8 +99,17 @@ var count = 0;
    }
 
    function chooseRating() {
-     let submitButton = document.querySelector(".submit");
-     submitButton.disabled = false;
+     var rate = document.getElementsByName('rating');
+     for(var i=1; i<rate.length; i++) {
+         if (rate[i].checked && seconds <= 18) {
+           let submitButton = document.querySelector(".submit");
+           submitButton.disabled = false;
+         }
+     }
+     /*if (seconds <= 18 && ) {
+       let submitButton = document.querySelector(".submit");
+       submitButton.disabled = false;
+     } */
    }
 
    function handleRequest(data) {
