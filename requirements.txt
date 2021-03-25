@@ -9,7 +9,7 @@ postgres==3.0.0
 psycopg2-binary==2.8.4
 psycopg2-pool==1.1
 pytz==2019.3
-PyYAML==5.1.2
+PyYAML==5.4
 sqlparse==0.3.0
 ua-parser==0.8.0
 user-agents==2.0
